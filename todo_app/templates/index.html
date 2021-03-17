@@ -2,17 +2,34 @@
 {% block title %}To-Do App{% endblock %}
 
 {% block content %}
-  <div class="jumbotron">
-    <h1 class="display-4">To-Do App</h1>
-    <p class="lead">Just another to-do app.</p>
-  </div>
 
-  <div class="row">
-    <div class="col-md-12">
-      <h2>Items</h2>
-      <ul class="list-group mb-4">
-        <!-- List the todo items here -->
-      </ul>
+<div class="row no-gutters">
+  <div class="col-md-12">
+    <div class="ae-card-container">
+      {% for card in list_of_cards %}
+
+      <div class="card" style="width: 18rem;">
+        <img src="/static/images/barley.jpg" class="card-img-top" alt="Barley Fields">
+        <div class="card-body">
+          <h5 class="card-title">{{card.name}}</h5>
+          {% if card.desc|length %}
+          <p class="card-text">{{card.desc}}</p>
+          {% else %}
+          <p class="card-text">No description for this task.</p>
+          {% endif %}
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><a href="{{card.shortUrl}}" class="card-link">View on Trello</a></li>
+          <li class="list-group-item">Last activity on {{card.dateLastActivity}}</li>
+        </ul>
+        <div class="card-body">
+          <a href="#" class="card-link">In Progress</a>
+          <a href="#" class="card-link">Done</a>
+        </div>
+      </div>
+      {% endfor %}
     </div>
   </div>
+</div>
+
 {% endblock %}
